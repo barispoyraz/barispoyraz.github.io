@@ -1,0 +1,48 @@
+<head>
+<script src="jquery-3.2.1.js"></script>
+<script src="game.js"></script>
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"> 
+</head>
+<body>
+        <nav class="navbar navbar-dark bg-primary">
+            <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#navTog">
+            </button>
+            <div class="collapse navbar-toggleable-sm" id="navTog">
+                <span class="navbar-brand">TRON Game</span>
+                <ul class="nav navbar-nav float-md-right">
+                    <li class ="nav-item"><a href ="index.html" class = "nav-link"> Home</a></li>
+                    <li class ="nav-item"><a href ="trongame.html" class = "nav-link"> TRON Game</a></li>
+                </ul>
+            </div>
+        </nav>
+</body>
+
+<div style="text-align:center">
+    <div id="winnerScreen">
+        <h2 id="winner"></h2>
+    </div>
+    <div>
+        <p>Player 1: W A S D</p>
+        <p>Player 2: Arrow Keys</p>
+        <canvas id="game-canvas" width="800" height="600" style="border:5px solid #000000;"></canvas>
+    </div>  
+    <div id="start">
+        <button id="start-button" type="button" class="btn btn-primary">Start</button>
+    </div>
+</div>
+    <script>
+        var canvas = document.getElementById('game-canvas');
+        $(document).ready(function () {
+            if (canvas.getContext('2d')) {
+                console.log("Browser supoort HTML5 Canvas");
+            }
+            else
+                console.log("Browser does not support HTML5 Canvas");
+        });
+
+        $("#start-button").click(function () {
+            $("#start").hide();
+            start(canvas);
+        });
+    </script>
