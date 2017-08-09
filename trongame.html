@@ -19,21 +19,116 @@
         </nav>
 </body>
 
+<!--Game Canvas-->
 <div style="text-align:center">
-    <div id="winnerScreen">
-        <h2 id="winner"></h2>
-    </div>
     <div>
         <p>Player 1: W A S D</p>
         <p>Player 2: Arrow Keys</p>
         <canvas id="game-canvas" width="800" height="600" style="border:5px solid #000000;"></canvas>
     </div>  
-    <div id="start">
-        <button id="start-button" type="button" class="btn btn-primary">Start</button>
-    </div>
 </div>
+
+<!--Start Button-->
+<div style="position: absolute; left: 10%;">
+	<div id="start" style="position: relative; margin-top: 15%; left: 1100%">
+		<button id="start-button" type="button" class="btn btn-primary">Start</button>
+	</div>
+</div>
+
+
+<!--Game Information: Player 1-->
+<div style="position: absolute; margin-top: 2%; left: 10%;">
+	<div style="position: relative; margin-top: -220%; left: -30%">
+		<h2>Player 1 Information </h2>
+	</div>
+	<div style="position: relative; margin-top: 20px; left: -30%">
+		<h5 id="player1-direction">Direction: - </h5>
+	</div>
+	<div style="position: relative; margin-top: 20px; left: -30%">
+		<h5 id="player1-distance">Distance: - </h5>
+	</div>
+</div>
+
+<!--Game Information: Player 2-->
+<div style="position: absolute; margin-top: 2%; left: 80%;">
+	<div style="position: relative; margin-top: -220%; left: -30%">
+		<h2>Player 2 Information </h2>
+	</div>
+	<div style="position: relative; margin-top: 20px; left: -30%">
+		<h5 id="player2-direction">Direction: - </h5>
+	</div>
+	<div style="position: relative; margin-top: 20px; left: -30%">
+		<h5 id="player2-distance">Distance: - </h5>
+	</div>
+</div>
+
+<!--Before game show the colors and allow change dynamically-->
+    <!--Player 1-->
+    <div id="player1-initial" style="position: absolute; margin-top: 2%; left: 35%;">
+        <div style="position: relative; margin-top: -450%; left: 20%;">
+            <h1>Player 1</h1>
+        </div>
+        <div style="position: relative; left: 50%; margin-top:10px">
+            <div id="player1-initial-color" style="height: 200px; border-left: 6px #42d7f4 solid;"></div>
+        </div>
+    </div>
+
+    <!--Player 2-->
+    <div id="player2-initial" style="position: absolute; margin-top: 2%; left: 55%;">
+        <div style="position: relative; margin-top: -430%; left: 20%;">
+            <h1>Player 2</h1>
+        </div>
+        <div style="position: relative; left: 50%; margin-top:10px">
+            <div id="player2-initial-color" style="height: 200px; border-left: 6px #ed15ac solid;"></div>
+        </div>
+    </div>
+	
+	<!--Player 1 Color Options-->
+    <div style="position: absolute; margin-top: 2%; left: 40%;">
+        <div style="position: relative; margin-top: -5%; left: 20%;">
+            <select id="player1-color">
+                <option value="rgb(255, 0, 0)">Red</option>
+                <option value="rgb(0, 255, 0)">Green</option>
+                <option value="rgb(0, 0, 255)">Blue</option>
+                <option value="rgb(255, 255, 0)">Yellow</option>
+                <option value="rgb(66, 215, 244)" selected>Light Blue</option>
+                <option value="rgb(237, 21, 172)">Pink</option>
+            </select>
+        </div>
+    </div>
+
+    <!--Player 1-->
+    <div style="position: absolute; margin-top: 2%; left: 41%;">
+        <div style="position: relative; margin-top: -60%; left: 20%;">
+            <p>Player 1</p>
+        </div>
+    </div>
+
+    <!--Player 2-->
+    <div style="position: absolute; margin-top: 2%; left: 55%;">
+        <div style="position: relative; margin-top: -60%; left: 20%;">
+            <p>Player 2</p>
+        </div>
+    </div>
+
+    <!--Player 2 Color Options-->
+    <div style="position: absolute; margin-top: 2%; left: 54%;">
+        <div style="position: relative; margin-top: -5%; left: 20%;">
+            <select id="player2-color">
+                <option value="rgb(255, 0, 0)">Red</option>
+                <option value="rgb(0, 255, 0)">Green</option>
+                <option value="rgb(0, 0, 255)">Blue</option>
+                <option value="rgb(255, 255, 0)">Yellow</option>
+                <option value="rgb(66, 215, 244)">Light Blue</option>
+                <option value="rgb(237, 21, 172)" selected>Pink</option>
+            </select>
+        </div>
+    </div>
+
+	<!--Connection-->
     <script>
         var canvas = document.getElementById('game-canvas');
+		var ctx = canvas.getContext('2d');
         $(document).ready(function () {
             if (canvas.getContext('2d')) {
                 console.log("Browser supoort HTML5 Canvas");
@@ -41,9 +136,35 @@
             else
                 console.log("Browser does not support HTML5 Canvas");
         });
-
+		var p1Color = document.getElementById("player1-color").options[document.getElementById("player1-color").selectedIndex].value;
+        var p2Color = document.getElementById("player2-color").options[document.getElementById("player2-color").selectedIndex].value;
+		
         $("#start-button").click(function () {
-            $("#start").hide();
-            start(canvas);
+            init({
+                player1Color: p1Color,
+                player2Color: p2Color,
+                pauseKey: 80
+            });
+
+            $('#player1-initial').hide();
+            $('#player2-initial').hide();
+			$('#start').hide();
+            start(canvas, ctx);
+        });
+		
+		$("#player1-color").on('change', function () {
+            p1Color = document.getElementById("player1-color").options[document.getElementById("player1-color").selectedIndex].value;
+            colorAssignment(p1Color, p2Color);
+            $('#player1-initial-color').css("border-left", '6px solid ' + p1Color);
+            paintRect();
+            $("#player1-color").blur();
+        });
+		
+        $("#player2-color").on('change', function () {
+            p2Color = document.getElementById("player2-color").options[document.getElementById("player2-color").selectedIndex].value;
+            colorAssignment(p1Color, p2Color);
+            $('#player2-initial-color').css("border-left", '6px solid ' + p2Color);
+            paintRect();
+            $("#player2-color").blur();
         });
     </script>
