@@ -95,9 +95,9 @@ function onKeyDown(event) {
 
 function gameOver(winner) {
     started = false;
-	cancelAnimationFrame(frameId);
+    cancelAnimationFrame(frameId);
     window.alert("Player " + winner + " wins!");
-	
+    window.location.reload();
 }
 
 function draw() {
