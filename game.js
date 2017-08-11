@@ -113,15 +113,15 @@ function mainLoop(canvas, ctx) {
     if (finished == true)
         location.reload();	
 	
+    if (paused == false)
+        draw();
+	
     validation();
     movement();
     updateInformation();
     paintRect();
     boundaryChecking();
-    collision();
-	
-    if (paused == false)
-        draw();    
+    collision();  
 }
 
 function collision() {
