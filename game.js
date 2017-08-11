@@ -95,8 +95,9 @@ function onKeyDown(event) {
 
 function gameOver(winner) {
     started = false;
-    cancelAnimationFrame(frameId);
+	cancelAnimationFrame(frameId);
     window.alert("Player " + winner + " wins!");
+	
 }
 
 function draw() {
@@ -109,6 +110,12 @@ function draw() {
 }
 
 function mainLoop(canvas, ctx) {
+	if (paused == false)
+        draw();
+
+    if (finished == true)
+        location.reload(); 
+	
     validation();
     movement();
     updateInformation();
@@ -116,11 +123,7 @@ function mainLoop(canvas, ctx) {
     boundaryChecking();
     collision();
     
-    if (paused == false)
-        draw();
-
-    if (finished == true)
-        location.reload();    
+       
 }
 
 function collision() {
@@ -207,7 +210,6 @@ function updateInformation() {
     var distanceY2 = player1BodyArray[0].y - player2BodyArray[0].y;
 
     document.getElementById("player1-distance").innerHTML = "Distance: " + "X: " + distanceX1 + " Y: " + distanceY1;
-
     document.getElementById("player2-distance").innerHTML = "Distance: " + "X: " + distanceX2 + " Y: " + distanceY2;
 }
 
