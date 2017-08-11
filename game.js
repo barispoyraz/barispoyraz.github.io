@@ -110,9 +110,6 @@ function draw() {
 }
 
 function mainLoop(canvas, ctx) {
-    if (finished == true)
-        location.reload();	
-	
     if (paused == false)
         draw();
 	
