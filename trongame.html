@@ -1,130 +1,93 @@
+<html>
 <head>
-<script src="jquery-3.2.1.js"></script>
-<script src="game.js"></script>
-<meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"> 
-<title>TRON Game</title>
+    <script src="jquery-3.2.1.js"></script>
+    <script src="game.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="site.css"
 </head>
 <body>
-        <nav class="navbar navbar-dark bg-primary">
-            <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#navTog">
-            </button>
-            <div class="collapse navbar-toggleable-sm" id="navTog">
-                <span class="navbar-brand">TRON Game</span>
-                <ul class="nav navbar-nav float-md-right">
-                    <li class ="nav-item"><a href ="index.html" class = "nav-link"> Home</a></li>
-                    <li class ="nav-item"><a href ="trongame.html" class = "nav-link"> TRON Game</a></li>
-                </ul>
-            </div>
-        </nav>
-</body>
-
-<!--Game Canvas-->
-<div style="text-align:center">
-    <div>
+    <nav class="navbar navbar-dark bg-primary">
+        <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#navTog"></button>
+        <div class="collapse navbar-toggleable-sm" id="navTog">
+            <span class="navbar-brand">TRON Game</span>
+            <ul class="nav navbar-nav float-md-right">
+                <li class ="nav-item"><a href ="index.html" class = "nav-link"> Home</a></li>
+                <li class ="nav-item"><a href ="trongame.html" class = "nav-link"> TRON Game</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+     <!--Game Information: Player 1-->
+    <div id="player1info">
+        <h2>Player 1 Information </h2>
+        <h5 class="playerStatsGap" id="player1-direction">Direction: - </h5>
+        <h5 class="playerStatsGap" id="player1-distance">Distance: - </h5>    
+    </div>
+    
+    <!--Game Information: Player 2-->
+    <div id="player2info">
+        <h2>Player 2 Information </h2>
+		<h5 class="playerStatsGap" id="player2-direction">Direction: - </h5>
+		<h5 class="playerStatsGap" id="player2-distance">Distance: - </h5>
+    </div>
+    
+    <!--Game Information-->
+    <div id="gameInfo">
         <p style="margin-top: 0%;">Player 1: W A S D</p>
         <p style="margin-top: -0.5%;">Player 2: Arrow Keys</p>
 		<p style="margin-top: -0.5%;">Press P to Pause the Game</p>
-        <canvas id="game-canvas" width="800" height="600" style="border:5px solid #000000;"></canvas>
-    </div>  
-</div>
-
-<!--Start Button-->
-<div style="position: absolute; left: 10%;">
-	<div id="start" style="position: relative; margin-top: 15%; left: 1100%">
-		<button id="start-button" type="button" class="btn btn-primary">Start</button>
-	</div>
-</div>
-
-
-<!--Game Information: Player 1-->
-<div style="position: absolute; margin-top: 2%; left: 10%;">
-	<div style="position: relative; margin-top: -220%; left: -30%">
-		<h2>Player 1 Information </h2>
-	</div>
-	<div style="position: relative; margin-top: 20px; left: -30%">
-		<h5 id="player1-direction">Direction: - </h5>
-	</div>
-	<div style="position: relative; margin-top: 20px; left: -30%">
-		<h5 id="player1-distance">Distance: - </h5>
-	</div>
-</div>
-
-<!--Game Information: Player 2-->
-<div style="position: absolute; margin-top: 2%; left: 80%;">
-	<div style="position: relative; margin-top: -220%; left: -30%">
-		<h2>Player 2 Information </h2>
-	</div>
-	<div style="position: relative; margin-top: 20px; left: -30%">
-		<h5 id="player2-direction">Direction: - </h5>
-	</div>
-	<div style="position: relative; margin-top: 20px; left: -30%">
-		<h5 id="player2-distance">Distance: - </h5>
-	</div>
-</div>
-
-<!--Before game show the colors and allow change dynamically-->
-    <!--Player 1-->
-    <div id="player1-initial" style="position: absolute; margin-top: 2%; left: 35%;">
-        <div style="position: relative; margin-top: -450%; left: 20%;">
+    </div>
+    
+    <!--Game Canvas-->
+    <div id="canvasParent">
+        <div id="canvasPlacement">    
+            <canvas id="game-canvas" width="800" height="600" style="border:5px solid #000000;"></canvas> 
+        </div>
+        <div class="player1Init" id="player1-initial">
             <h1>Player 1</h1>
+            <div class="player1InitColor" id="player1-initial-color"></div>
         </div>
-        <div style="position: relative; left: 50%; margin-top:10px">
-            <div id="player1-initial-color" style="height: 200px; border-left: 6px #42d7f4 solid;"></div>
-        </div>
-    </div>
-
-    <!--Player 2-->
-    <div id="player2-initial" style="position: absolute; margin-top: 2%; left: 55%;">
-        <div style="position: relative; margin-top: -430%; left: 20%;">
+        <div class="player2Init" id="player2-initial">
             <h1>Player 2</h1>
-        </div>
-        <div style="position: relative; left: 50%; margin-top:10px">
-            <div id="player2-initial-color" style="height: 200px; border-left: 6px #ed15ac solid;"></div>
+            <div class="player2InitColor" id="player2-initial-color"></div>
         </div>
     </div>
-	
-	<!--Player 1 Color Options-->
-    <div style="position: absolute; margin-top: 2%; left: 40%;">
-        <div style="position: relative; margin-top: -5%; left: 20%;">
-            <select id="player1-color">
-                <option value="rgb(255, 0, 0)">Red</option>
-                <option value="rgb(0, 255, 0)">Green</option>
-                <option value="rgb(0, 0, 255)">Blue</option>
-                <option value="rgb(255, 255, 0)">Yellow</option>
-                <option value="rgb(66, 215, 244)" selected>Light Blue</option>
-                <option value="rgb(237, 21, 172)">Pink</option>
-            </select>
+    
+    <!--Player 1 & Player 2-->
+    <div class="canvasParent">
+        <div class="playerColorOptions">
+            <div class="player1ColorOptions">
+                <p>Player 1</p>
+                <select id="player1-color">
+                    <option value="rgb(255, 0, 0)">Red</option>
+                    <option value="rgb(0, 255, 0)">Green</option>
+                    <option value="rgb(0, 0, 255)">Blue</option>
+                    <option value="rgb(255, 255, 0)">Yellow</option>
+                    <option value="rgb(66, 215, 244)" selected>Light Blue</option>
+                    <option value="rgb(237, 21, 172)">Pink</option>
+                </select>
+            </div>
+            <div class="player2ColorOptions">
+                <p>Player 2</p>
+                <select id="player2-color">
+                    <option value="rgb(255, 0, 0)">Red</option>
+                    <option value="rgb(0, 255, 0)">Green</option>
+                    <option value="rgb(0, 0, 255)">Blue</option>
+                    <option value="rgb(255, 255, 0)">Yellow</option>
+                    <option value="rgb(66, 215, 244)">Light Blue</option>
+                    <option value="rgb(237, 21, 172)" selected>Pink</option>
+                </select>    
+            </div>
         </div>
     </div>
-
-    <!--Player 1-->
-    <div style="position: absolute; margin-top: 2%; left: 41%;">
-        <div style="position: relative; margin-top: -60%; left: 20%;">
-            <p>Player 1</p>
-        </div>
+    
+    <!--Start Button-->
+    <div id="buttonPosition">
+		<button id="start-button" type="button" class="btn btn-primary">Start</button>
     </div>
-
-    <!--Player 2-->
-    <div style="position: absolute; margin-top: 2%; left: 55%;">
-        <div style="position: relative; margin-top: -60%; left: 20%;">
-            <p>Player 2</p>
-        </div>
-    </div>
-
-    <!--Player 2 Color Options-->
-    <div style="position: absolute; margin-top: 2%; left: 54%;">
-        <div style="position: relative; margin-top: -5%; left: 20%;">
-            <select id="player2-color">
-                <option value="rgb(255, 0, 0)">Red</option>
-                <option value="rgb(0, 255, 0)">Green</option>
-                <option value="rgb(0, 0, 255)">Blue</option>
-                <option value="rgb(255, 255, 0)">Yellow</option>
-                <option value="rgb(66, 215, 244)">Light Blue</option>
-                <option value="rgb(237, 21, 172)" selected>Pink</option>
-            </select>
-        </div>
-    </div>
+</body>
+</html>
 
 	<!--Connection-->
     <script>

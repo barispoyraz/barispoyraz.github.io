@@ -1,0 +1,83 @@
+html, body, #wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+}
+
+#player1info {
+    position: absolute;
+    margin-top: 6%;
+    left: 2%;
+}
+
+#player2info {
+    position: absolute;
+    margin-top: 6%;
+    right: 2%;
+}
+
+.playerStatsGap {
+    padding-top: 5%;
+}
+
+#canvasParent {
+    position: absolute;
+    left: 50%;
+}
+
+#canvasPlacement {
+    position: relative;
+    left: -50%;
+    z-index: 1;
+}
+
+#gameInfo {
+    text-align: center;
+    padding: 0.5%;
+}
+
+#buttonPosition {
+    text-align: center;
+    margin-top: -3%;
+}
+
+.player1Init {
+    position: relative;
+    left: -35%;
+    margin-top: -70%;
+    z-index: 2;
+}
+
+.player2Init {
+    position: relative;
+    right: -25%;
+    margin-top: -31%;
+    z-index: 2;
+}
+
+.player1InitColor {
+    height: 200px;
+    border-left: 6px #42d7f4 solid;
+}
+
+.player2InitColor {
+    height: 200px; 
+    border-left: 6px #ed15ac solid;
+}
+
+.playerColorOptions {
+    position: relative;
+    text-align: center;
+    margin-top: 40%;
+}
+
+.player1ColorOptions {
+    position: relative;
+    left: -15%;
+}
+
+.player2ColorOptions {
+    position: relative;
+    left: 15%;
+    margin-top: -4.25%;
+}
