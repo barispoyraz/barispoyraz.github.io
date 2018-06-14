@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>CS465 - Assignment I</title>
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+attribute vec4 vColor;
+
+varying vec4 fColor;
+
+void
+main()
+{
+    gl_Position = vPosition;   
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 fColor;
+uniform vec4 color;
+
+void
+main()
+{
+    gl_FragColor = color;
+}
+</script>
+
+<script type="text/javascript" src="../Source/webgl-utils.js"></script>
+<script type="text/javascript" src="../Source/initShaders.js"></script>
+<script type="text/javascript" src="../Source/MV.js"></script>
+    
+</head>   
+
+<body>
+    <div style="border-bottom: 3px solid green">
+        <p style="text-align: center; font-size: 15pt">CS465 - Assignment I - Barış Poyraz</p>
+    </div>
+    <div style="margin-top: 0.25%">
+        <section style="width: 25%; float: left;" float="left"> 
+            <div style="border-bottom: 2px solid black">
+                <h1>INFORMATION</h1>
+            </div>
+            <div style="border-bottom: 1px solid black">
+                <p>This assignment is prepared for CS 465 - Computer Graphics course using WebGL and Javascript. The
+                aim of this assignment is mainly to generate Sierpinski's Carpet with upto 5 iterations. Additional capabilities
+                of the program are implemented with respect to the assignment information. Below, there are descriptions of the functionalities
+                with respect to the user interface: </p>
+            </div>
+            <div style="border-bottom: 1px solid black; margin-top: 2%">
+                <h3 style="display: inline">Number of Iterations: </h3>
+                <p style="display: inline">It displays the Sierpinski's Carpet for 1-5 iterations</p>
+            </div>
+            <div style="border-bottom: 1px solid black; margin-top: 2%">
+                <h3 style="display: inline">Background Color: </h3>
+                <p style="display: inline">It changes the background color of the canvas. Default: White</p>
+            </div>
+            <div style="border-bottom: 1px solid black; margin-top: 2%">
+                <h3 style="display: inline">Foreground color: </h3>
+                <p style="display: inline">It changes the foreground color of the canvas. Default: Red</p>
+            </div>
+            <div style="border-bottom: 1px solid black; margin-top: 2%">
+                <h3 style="display: inline">Save the Sierpinski Carpet: </h3>
+                <p style="display: inline">It saves the current state of the sierpinski carpet, stores them in a 
+                text file and downloads it.</p>
+            </div>
+            <div style="border-bottom: 1px solid black; margin-top: 2%">
+                <h3 style="display: inline">Select File: </h3>
+                <p style="display: inline">It takes a text file as input and generates the previous state of the program
+                according to the text file</p>
+            </div>
+            <div style="border-bottom: 1px solid black; margin-top: 2%">
+                <h3 style="display: inline">Mode of Displaying the Fractals: </h3>
+                <p style="display: inline">The fractals can be displayed by using either Filled Polygons option, or with Lines
+                option. Default: Filled Polygons</p>
+            </div>
+       </section> 
+    </div>
+    
+    <section style="width: 50%; float: left;"> 
+        <center>    
+            <canvas id="gl-canvas" width="512" height="512" style="border: 1px solid #000000;" >
+                Oops ... your browser doesn't support the HTML5 canvas element
+            </canvas>
+        </center> 
+    </section> 
+    
+    <section style="width: 25%; float: right;"  >
+        <div style="display: inline">
+            <p id="num_iter">Number of Iterations: 1</p>
+            <input id="num_iter_range_slider" type = "range" min = "1" max = "5" value="0" style="border-radius: 15px">
+        </div>
+        <div>
+            <p>Background Color</p>
+            <input id="background_color" type="color" value="#ffffff">
+            <p>Foreground Color</p>
+            <input id="foreground_color" type="color" value="#ff0000">
+        </div>
+        <div style="margin-top: 5%">
+            <p>Save the Current State</p>
+            <input id="save_button" type="button" value="Save the Sierpinski Carpet">
+            <p>Load the Previous(Stored) State</p>
+            <input id="load_file" type="file" value="Load the Sierpinski Carpet">
+        </div>
+        <div style="margin-top: 5%; display: inline-block;">
+            <p>Display the fractals using:</p>
+            <select id="display_fractals">
+                <option value="draw_by_filled_polygons" selected>Filled Polygons</option>
+                <option value="draw_by_lines">Lines</option>
+            </select>
+        </div>
+    </section>
+</body>
+    
+<script type="text/javascript" src="../Source/sierpinski_carpet.js"></script>
+
+</html>
